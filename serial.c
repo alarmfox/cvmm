@@ -47,11 +47,11 @@ static struct serial8250_device devices[] = {
 
 #define NR_DEVICES (sizeof(devices) / sizeof(devices[0]))
 
-static int vm_fd = -1;
+static int vmfd = -1;
 
 static void irq_line(int irq, int level) {
 	struct kvm_irq_level l = { .irq = irq, .level = level };
-	ioctl(vm_fd, KVM_IRQ_LINE, &l);
+	ioctl(vmfd, KVM_IRQ_LINE, &l);
 }
 
 static void serial8250_update_irq(struct serial8250_device *dev) {
@@ -206,10 +206,10 @@ static void *serial8250_poll_thread(void *arg) {
 	return NULL;
 }
 
-int serial8250__init(int vmfd) {
+int serial8250__init(int _vmfd) {
 	pthread_t tid;
 
-	vm_fd = vmfd;
+	vmfd = _vmfd;
 	for (unsigned i = 0; i < NR_DEVICES; i++)
 		irq_line(devices[i].irq, 0);
 
