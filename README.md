@@ -14,7 +14,7 @@ cp busybox.config kbuild-initramfs/.config
 make -C <path to busybox src> O=kbuild-initramfs oldconfig
 make -C <path to busybox src> O=kbuild-initramfs CONFIG_PREFIX=$(pwd)/initramfs install
 mkdir -p initramfs/{dev,proc,sys,tmp}
-install -m 755 init $PROJ/initramfs/init
+install -m 755 init initramfs/init
 (cd initramfs && find . -print0 | cpio --null -o --format=newc) | gzip -9 > initramfs.cpio.gz
 ```
 
