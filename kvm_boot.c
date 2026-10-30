@@ -335,7 +335,7 @@ static int load_guest_image(const void *mem, const char *image_path, const char 
 
     memcpy((uint8_t *)mem + KERNEL_LOAD_ADDR, (uint8_t *)data + setup_size, st.st_size - setup_size);
 
-    strcpy((char *)mem + CMDLINE_START, "earlyprintk=serial,ttyS0,115200 console=ttyS0 acpi=off pci=off panic=-1 rebooto=t");
+    strcpy((char *)mem + CMDLINE_START, "earlyprintk=serial,ttyS0,115200 console=ttyS0 acpi=off pci=off panic=-1 reboot=t");
 
     /* Load flags */
     boot->hdr.type_of_loader    = 0xFF;
