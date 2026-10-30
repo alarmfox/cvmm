@@ -20,7 +20,7 @@ all: $(ELF)
 $(ELF): $(OBJS)
 	$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
-%.o: %c
+%.o: %.c
 	$(CC) $(CPPFLAGS) $(CFLAGS)
 
 clean:
